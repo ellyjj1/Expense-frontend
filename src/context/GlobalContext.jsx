@@ -16,13 +16,13 @@ export default function GlobalState({ children }) {
     const [allTransactions, setallTransactions] = useState([]);
 
     // Azure环境
-    // const baseURL = "https://expense-backend-ggc9a0gsgdd3c4a7.canadacentral-01.azurewebsites.net/";
+    const baseURL = "https://expense-backend-ggc9a0gsgdd3c4a7.westus-01.azurewebsites.net/";
 
     // Vercel环境
     // const baseURL = "https://expense-tracker-backend-navy.vercel.app/";
 
-    const baseURL = "http://127.0.0.1:8000/";
-    // const baseURL_Auth = "http://127.0.0.1:8000/";
+    // const baseURL = "http://127.0.0.1:8000/";
+    // // const baseURL_Auth = "http://127.0.0.1:8000/";
 
 
 

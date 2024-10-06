@@ -3,7 +3,7 @@ import avatar1 from '../../assets/avatar1.png'; // 替换为正确的图片路�
 
 export default function Footer() {
   return (
-    <Box position="relative" zIndex="10" as="footer" bg='gray.100' mt='5rem'>
+    <Box position="relative" zIndex="10" as="footer" bg='gray.100' mt='5rem' mb='0'>
       <Box maxW="5xl" w="full" px={{ base: 4, xl: 0 }} py={{ base: 10, lg: 16 }} mx="auto" >
         <Flex align="center">
           <Image src={avatar1} alt="avatar1" w="16" h="auto" borderRadius="50"/>
