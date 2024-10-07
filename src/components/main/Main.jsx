@@ -41,7 +41,6 @@ export default function Main() {
     navigate("/")
   }
   
-  
 
   return (
     <Flex textAlign='center' flexDirection={'column '} pr={'5'} pl={'5'}>
