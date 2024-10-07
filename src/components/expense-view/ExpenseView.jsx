@@ -82,7 +82,7 @@ function ExpenseView() {
             <Th>Description</Th>
             <Th>Amount</Th>
             <Th>Date</Th>
-            <Th>Action</Th>
+            {/* <Th>Action</Th> */}
           </Tr>
         </Thead>
         <Tbody>
