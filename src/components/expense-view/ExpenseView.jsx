@@ -49,7 +49,7 @@ function ExpenseView() {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`${baseURL}transactions/${id}/`, {
+    axios.delete(`${baseURL}api/transactions/${id}/`, {
       headers: {
         "Authorization": "Token " + token,
       }
@@ -97,9 +97,9 @@ function ExpenseView() {
               <Td>
                 <Text>{formatDateTime(item.date)}</Text>
               </Td>
-              <Td>
+              {/* <Td>
                 <Button colorScheme="red" onClick={() => handleDelete(item.id)}>Delete</Button> 
-              </Td>
+              </Td> */}
             </Tr>
           ),
  
