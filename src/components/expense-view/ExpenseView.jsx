@@ -1,4 +1,4 @@
-import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react'
+import { Box, Text, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react'
 import React, { useEffect, useContext } from 'react'
 import axios from 'axios'
 import { GlobalContext } from '../../context/GlobalContext'
@@ -48,20 +48,20 @@ function ExpenseView() {
     return dateObj.toLocaleString();  // Returns the date and time in the user's local time zone
   };
 
-  const handleDelete = (id) => {
-    axios.delete(`${baseURL}api/transactions/${id}/`, {
-      headers: {
-        "Authorization": "Token " + token,
-      }
-    })
-    .then(() => {
-      // Update the state to remove the deleted transaction
-      setallTransactions(prevTransactions => prevTransactions.filter(item => item.id !== id));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  };
+  // const handleDelete = (id) => {
+  //   axios.delete(`${baseURL}api/transactions/${id}/`, {
+  //     headers: {
+  //       "Authorization": "Token " + token,
+  //     }
+  //   })
+  //   .then(() => {
+  //     // Update the state to remove the deleted transaction
+  //     setallTransactions(prevTransactions => prevTransactions.filter(item => item.id !== id));
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // };
 
   return (
     <Box
