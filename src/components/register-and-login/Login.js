@@ -52,6 +52,38 @@ function Login(props) {
             });
     }
 
+    // New function for admin login
+    function adminLogin() {
+        let data = JSON.stringify({
+            "username": username, 
+            "password": password 
+        });
+
+        let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: baseURL + 'auth/',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: data,
+        };
+
+        axios.request(config)
+            .then((response) => {
+                console.log(JSON.stringify(response.data));
+                localStorage.setItem('authToken', response.data.token); // Store token in local storage
+                localStorage.setItem('username', username); // Store admin username in local storage
+
+                setLogin_status("Admin Login Success!");
+                navigate('/user-list'); // Redirect to user list page
+            })
+            .catch((error) => {
+                console.log(error);
+                setLogin_status("Admin Username or Password is wrong!");
+            });
+    }
+
     return (
         <div className="container mt-5">
             <Text
@@ -107,23 +139,21 @@ function Login(props) {
                     <Button colorScheme='blue' id={"loginbtn"} onClick={login}>Login</Button>
                 </Flex>
                 <Link to="/register"> {/* 添加注册链接 */}
-                    <Button colorScheme='teal' ml={'4'} mt='2rem'>
+                    <Button colorScheme='blue' ml={'4'} mt='2rem'>
                         Register
                     </Button>
                 </Link>
             </Flex>
+
+            {/* Admin Login Button */}
+            <Flex align="center" justify="center" mt='2rem'>
+                <Button colorScheme='red' onClick={adminLogin}>Admin Login</Button>
+            </Flex>
+
             {/* Login Status */}
             <Text align="center" justify="center" mt='2rem' id={'login_status'}>{login_status}</Text>
-            {/* <Text align="center" justify="center" mt='2rem' >You can use username: test, password: test to try the expense tracker </Text> */}
-
-
-            {/*/!show token to check if login success*!/*/}
-            {/*<p id={"token"}>*/}
-            {/*    {localStorage.getItem('authToken')}*/}
-            {/*</p>*/}
         </div>
     );
 }
 
 export default Login;
-

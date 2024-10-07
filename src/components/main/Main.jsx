@@ -33,14 +33,14 @@ export default function Main() {
       .catch((error) => {
         console.log(error);
       });
-  }, [baseURL, settotalIncome,settotalExpense,token])
-  
+  }, [baseURL, settotalIncome, settotalExpense, token])
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("username");
     navigate("/")
   }
-  
+
 
   return (
     <Flex textAlign='center' flexDirection={'column '} pr={'5'} pl={'5'}>
@@ -60,7 +60,7 @@ export default function Main() {
           </Button>
           <Button
             onClick={handleLogout}
-            colorScheme='teal'
+            colorScheme='gray' variant='outline'
             ml={'4'}
           >
             Logout

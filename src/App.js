@@ -5,6 +5,7 @@ import './App.css';
 import Main from './components/main/Main';
 import Login from './components/register-and-login/Login'; // 引入 Login 组件
 import Register from './components/register-and-login/Register'; // 引入 Register 组件
+import Admin from './components/admin/admin'; // 引入 Admin 组件
 import Footer from './components/footer/Footer';
 
 function App() {
@@ -15,8 +16,10 @@ function App() {
           {/* 定义路由 */}
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/Main" element={<Main />} />
+            <Route path="/main" element={<Main />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/user-list" element={<Admin />} /> {/* 确保使用 Admin 组件 */}
+
           </Routes>
           <Footer />
         </Box>

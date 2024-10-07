@@ -82,62 +82,62 @@ function Register() {
             </Text>
             <Heading as='h2' textAlign='center' size='xl' mt={2}>Register Page</Heading>
 
-            <Flex align="center" justify="center" mt={5}>
+            <Flex align="center"  mt={5}>
                 <form onSubmit={handleSubmit}>
-                    
+
                     <FormControl id="username" mb={4} isRequired >
-                    <Flex align="center" justify="space">
-                        <FormLabel>Username</FormLabel>
-                        <Input
-                            type="text"
-                            value={username}
-                            onChange={handleUsernameChange}
-                            placeholder="Enter Username"
-                            focusBorderColor="blue.500"
-                            ml="3rem"
-                        />
+                        <Flex align="center" justify="space">
+                            <FormLabel>Username</FormLabel>
+                            <Input
+                                type="text"
+                                value={username}
+                                onChange={handleUsernameChange}
+                                placeholder="Enter Username"
+                                focusBorderColor="blue.500"
+                                ml="3rem"
+                            />
                         </Flex>
                     </FormControl>
-                    
+
 
                     <FormControl id="password" mb={4} isRequired>
-                    <Flex align="center" justify="space">
+                        <Flex align="center" justify="space">
 
-                        <FormLabel>Password</FormLabel>
-                        <Input
-                            type="password"
-                            value={password}
-                            onChange={handlePasswordChange}
-                            placeholder="Enter Password"
-                            focusBorderColor="blue.500"
-                            ml="3rem"
-                        />
-                                                </Flex>
+                            <FormLabel>Password</FormLabel>
+                            <Input
+                                type="password"
+                                value={password}
+                                onChange={handlePasswordChange}
+                                placeholder="Enter Password"
+                                focusBorderColor="blue.500"
+                                ml="3rem"
+                            />
+                        </Flex>
 
                     </FormControl>
 
                     <FormControl id="confirmPassword" mb={6} isRequired>
-                    <Flex align="center" justify="space">
+                        <Flex align="center" justify="space">
 
-                        <FormLabel>Confirm Password</FormLabel>
-                        <Input
-                            type="password"
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
-                            placeholder="Confirm Password"
-                            focusBorderColor="blue.500"
-                            ml="3rem"                            
-                        />
-                                                </Flex>
+                            <FormLabel>Confirm Password</FormLabel>
+                            <Input
+                                type="password"
+                                value={confirmPassword}
+                                onChange={handleConfirmPasswordChange}
+                                placeholder="Confirm Password"
+                                focusBorderColor="blue.500"
+                                ml="3rem"
+                            />
+                        </Flex>
 
                     </FormControl>
 
-                    <Flex  align="center" justify="center" mt={4}>
+                    <Flex align="center" justify="center" mt={4}>
                         <Button type="submit" colorScheme="teal">Register</Button>
                     </Flex>
                 </form>
             </Flex>
-            <Flex align="center" justify="center" mt={4}>
+            <Flex align="flex" justify="center" mt={4}>
                 {register_status && <p>{register_status}</p>}
             </Flex>
 
