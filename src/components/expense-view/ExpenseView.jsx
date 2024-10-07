@@ -49,7 +49,7 @@ function ExpenseView() {
   };
 
   const handleDelete = (id) => {
-    axios.delete(`${baseURL}/transactions/${id}/`, {
+    axios.delete(`${baseURL}transactions/${id}/`, {
       headers: {
         "Authorization": "Token " + token,
       }
