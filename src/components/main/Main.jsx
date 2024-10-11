@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, Flex, Heading, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Input, Text } from '@chakra-ui/react'
+import { Button, Flex, Heading, useDisclosure, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Input } from '@chakra-ui/react'
 import { WarningIcon } from '@chakra-ui/icons'
 import Summary from '../summary/Summary'
 import ExpenseView from '../expense-view/ExpenseView'
