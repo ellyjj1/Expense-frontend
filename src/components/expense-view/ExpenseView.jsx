@@ -1,22 +1,20 @@
-import { Box, Text, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react'
-import React, { useEffect, useContext } from 'react'
+import { Box, Text, Table, Thead, Tbody, Tr, Th, Td, Button } from '@chakra-ui/react'
+import React, { useEffect, useContext, useState } from 'react'
 import axios from 'axios'
 import { GlobalContext } from '../../context/GlobalContext'
+import AddTransaction from '../add-transaction/AddTransaction'
 
 
 function ExpenseView() {
 
   const { baseURL, allTransactions, setallTransactions } = useContext(GlobalContext)
   const token = localStorage.getItem('authToken')
-
+  
+  // 添加状态来控制模态框和当前编辑的交易
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentTransaction, setCurrentTransaction] = useState(null);
 
   useEffect(() => {
-    let data = JSON.stringify({
-      "description": "sep",
-      "amount": 500,
-      "type": "expense"
-    });
-
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
@@ -24,8 +22,7 @@ function ExpenseView() {
       headers: {
         "Authorization": "Token " + token,
         'Content-Type': 'application/json'
-      },
-      data: data
+      }
     };
 
     axios.request(config)
@@ -36,7 +33,7 @@ function ExpenseView() {
         console.log(error);
       });
 
-  }, [baseURL, setallTransactions,token])
+  }, [baseURL, setallTransactions, token])
 
 
   const formatDateTime = (dateTimeString) => {
@@ -48,20 +45,15 @@ function ExpenseView() {
     return dateObj.toLocaleString();  // Returns the date and time in the user's local time zone
   };
 
-  // const handleDelete = (id) => {
-  //   axios.delete(`${baseURL}api/transactions/${id}/`, {
-  //     headers: {
-  //       "Authorization": "Token " + token,
-  //     }
-  //   })
-  //   .then(() => {
-  //     // Update the state to remove the deleted transaction
-  //     setallTransactions(prevTransactions => prevTransactions.filter(item => item.id !== id));
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // };
+  const handleEdit = (transaction) => {
+    setCurrentTransaction(transaction); // 设置当前编辑的交易
+    setIsOpen(true); // 打开模态框
+  };
+
+  const handleClose = () => {
+    setIsOpen(false); // 关闭模态框
+    setCurrentTransaction(null); // 清空当前交易
+  };
 
   return (
     <Box
@@ -82,7 +74,7 @@ function ExpenseView() {
             <Th>Description</Th>
             <Th>Amount</Th>
             <Th>Date</Th>
-            {/* <Th>Action</Th> */}
+            <Th>Action</Th> {/* 添加 Action 列 */}
           </Tr>
         </Thead>
         <Tbody>
@@ -97,16 +89,20 @@ function ExpenseView() {
               <Td>
                 <Text>{formatDateTime(item.date)}</Text>
               </Td>
-              {/* <Td>
-                <Button colorScheme="red" onClick={() => handleDelete(item.id)}>Delete</Button> 
-              </Td> */}
+              <Td>
+                <Button colorScheme="blue" onClick={() => handleEdit(item)}>Edit</Button> {/* 添加 Edit 按钮 */}
+              </Td>
             </Tr>
-          ),
- 
-          )
-          }
+          ))}
         </Tbody>
       </Table>
+
+      {/* 添加 AddTransaction 组件 */}
+      <AddTransaction 
+        isOpen={isOpen} 
+        onClose={handleClose} 
+        transaction={currentTransaction} // 传递当前交易数据
+      />
     </Box>
   )
 }

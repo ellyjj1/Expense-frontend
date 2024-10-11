@@ -1,10 +1,10 @@
 import { Button, FormControl, FormLabel, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Radio, RadioGroup } from '@chakra-ui/react'
-import React, { useContext, useState} from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { GlobalContext } from '../../context/GlobalContext'
 import axios from 'axios'
 
 
-function AddTransaction({ onClose, isOpen }) {
+function AddTransaction({ onClose, isOpen, transaction }) {
 
     const { baseURL } = useContext(GlobalContext);
     const token = localStorage.getItem('authToken');
@@ -15,6 +15,23 @@ function AddTransaction({ onClose, isOpen }) {
         amount: 0,
         type: 'expense'
     });
+
+    // 使用 useEffect 来更新表单数据
+    useEffect(() => {
+        if (transaction) {
+            setformData({
+                description: transaction.description,
+                amount: transaction.amount,
+                type: transaction.type
+            });
+        } else {
+            setformData({
+                description: '',
+                amount: 0,
+                type: 'expense'
+            });
+        }
+    }, [transaction]); // 依赖于 transaction
 
     function handleFormChange(event) {
         setformData({
@@ -30,29 +47,28 @@ function AddTransaction({ onClose, isOpen }) {
             "description": formData.description,
             "amount": formData.amount,
             "type": formData.type,
-            
-          });
-          
-          let config = {
-            method: 'post',
+        });
+
+        let config = {
+            method: transaction ? 'put' : 'post',
             maxBodyLength: Infinity,
-            url: baseURL + 'api/transactions/',
+            url: transaction ? `${baseURL}api/transactions/${transaction.id}/` : `${baseURL}api/transactions/`,
             headers: { 
                 "Authorization": "Token " + token,
                 'Content-Type': 'application/json'
             },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            setformData({ description: '', amount: '', type: 'expense' });
-            onClose();
-            window.location.reload()
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+            data: data
+        };
+
+        axios.request(config)
+            .then((response) => {
+                setformData({ description: '', amount: 0, type: 'expense' });
+                onClose();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     return (
@@ -60,7 +76,7 @@ function AddTransaction({ onClose, isOpen }) {
             <form onSubmit={handleSubmit}>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader>Add New Transaction</ModalHeader>
+                    <ModalHeader>{transaction ? 'Edit Transaction' : 'Add New Transaction'}</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
                         <FormControl>
